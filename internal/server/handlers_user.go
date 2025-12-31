@@ -26,11 +26,9 @@ func (s *Server) handleIndex(w http.ResponseWriter, r *http.Request) {
 
 	devicesWithUI := make([]DeviceWithUIScale, 0, len(user.Devices))
 
+	// Calculate UI details for ALL devices to ensure "Copy to..." dropdowns work
 	for i := range user.Devices {
 		device := &user.Devices[i]
-		if targetDeviceID != "" && device.ID != targetDeviceID {
-			continue
-		}
 		slog.Debug("handleIndex device", "id", device.ID, "apps_count", len(device.Apps))
 
 		// Sort Apps
@@ -52,9 +50,16 @@ func (s *Server) handleIndex(w http.ResponseWriter, r *http.Request) {
 	}
 
 	tmplData := TemplateData{User: user, DevicesWithUIScales: devicesWithUI}
-	if partial == "device_card" && len(devicesWithUI) == 1 {
-		tmplData.Partial = "device_card"
-		tmplData.Item = &devicesWithUI[0]
+
+	// If a specific device is requested, find it in the list for the 'Item' field
+	if partial == "device_card" && targetDeviceID != "" {
+		for i := range devicesWithUI {
+			if devicesWithUI[i].Device.ID == targetDeviceID {
+				tmplData.Partial = "device_card"
+				tmplData.Item = &devicesWithUI[i]
+				break
+			}
+		}
 	}
 
 	s.renderTemplate(w, r, "index", tmplData)
