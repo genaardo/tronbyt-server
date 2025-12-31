@@ -1,9 +1,10 @@
 /* 
- * Tronbyt Server Design Tokens
- * Phase 1: Foundation
- * 
- * Palette: Slate (Neutrals) + Indigo (Primary)
- * Typography: Inter
+  USAGE GUIDE:
+  - Text: Use var(--text-main) for headers, var(--text-muted) for metadata.
+  - Icons: Always wrap icons in a flex container if next to text.
+  - Spacing: Use multiples of 4px (--space-1).  
+  - Palette: Slate (Neutrals) + Indigo (Primary)
+  - Typography: Inter
  */
 
 :root {
@@ -63,8 +64,9 @@
 }
 
 /* --- Dark Mode Overrides --- */
+/* --- Dark Mode Overrides --- */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --bg-body: var(--slate-950);
     --bg-surface: var(--slate-900);
     
@@ -76,4 +78,17 @@
     /* Slightly less intense shadow for dark mode visibility */
     --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.3);
   }
+}
+
+/* Explicit Dark Theme (overrides system preference) */
+[data-theme="dark"] {
+    --bg-body: var(--slate-950);
+    --bg-surface: var(--slate-900);
+    
+    --text-main: var(--slate-50);
+    --text-muted: var(--slate-400);
+    
+    --border-color: var(--slate-800);
+    
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.3);
 }

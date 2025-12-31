@@ -208,3 +208,114 @@
   margin: 0;
   padding: 0;
 }
+
+/* --- Device Card Grid Layout --- */
+.device-card-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+}
+
+@media (min-width: 768px) {
+    .device-card-grid {
+        grid-template-columns: 1fr 400px; /* Increased right column for even larger preview */
+        grid-template-areas: 
+            "header preview"
+            "controls preview";
+        align-items: start;
+    }
+    
+    .device-header { grid-area: header; }
+    .device-controls { grid-area: controls; }
+    .device-preview-section { 
+        grid-area: preview; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+    }
+    
+    /* Ensure image scales up nicely */
+    .device-preview-section .app-img img {
+        width: 384px; /* 3x Original Size */
+        height: auto;
+        image-rendering: pixelated;
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-md);
+    }
+}
+
+/* Minimal Device Info Toggle */
+.btn-minimal {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    padding: var(--space-1) var(--space-2);
+}
+
+.btn-minimal:hover {
+    color: var(--primary);
+    background: transparent;
+    text-decoration: underline;
+}
+
+.device-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+}
+
+.control-group {
+    margin-bottom: var(--space-4);
+}
+
+.view-toggle-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: var(--space-4);
+    margin-bottom: var(--space-2);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--border-color);
+}
+
+.view-toggle-container {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+/* Text Utilities */
+.text-main { color: var(--text-main); }
+.text-muted { color: var(--text-muted); }
+.text-sm { font-size: 0.875rem; }
+.text-xs { font-size: 0.75rem; }
+.font-bold { font-weight: 600; }
+.text-italic { font-style: italic; }
+.margin-right-xs { margin-right: var(--space-1); }
+.margin-right-sm { margin-right: var(--space-2); }
+.transform-rotate-180 { transform: rotate(180deg); }
+.w-full { width: 100%; }
+
+/* Fix brightness panel alignment */
+.brightness-panel {
+    display: flex;
+    gap: 2px;
+    margin-top: var(--space-1);
+}
+
+.brightness-btn {
+    padding: 4px 12px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-surface);
+    cursor: pointer;
+}
+
+.brightness-btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
