@@ -172,6 +172,30 @@
                             <td class="info-value">{{ .Item.Info.MACAddress }}</td>
                         </tr>
                         {{ end }}
+                        {{ if .Item.Info.Hostname }}
+                        <tr>
+                            <td class="info-label">{{ t $.Localizer "Hostname:" }}</td>
+                            <td class="info-value">{{ .Item.Info.Hostname }}</td>
+                        </tr>
+                        {{ end }}
+                        {{ if .Item.Info.SNTPServer }}
+                        <tr>
+                            <td class="info-label">{{ t $.Localizer "SNTP Server:" }}</td>
+                            <td class="info-value">{{ .Item.Info.SNTPServer }}</td>
+                        </tr>
+                        {{ end }}
+                        {{ if .Item.Info.SyslogAddr }}
+                        <tr>
+                            <td class="info-label">{{ t $.Localizer "Syslog Address:" }}</td>
+                            <td class="info-value">{{ .Item.Info.SyslogAddr }}</td>
+                        </tr>
+                        {{ end }}
+                        {{ if .Item.Info.SSID }}
+                        <tr>
+                            <td class="info-label">{{ t $.Localizer "WiFi SSID:" }}</td>
+                            <td class="info-value">{{ .Item.Info.SSID }}</td>
+                        </tr>
+                        {{ end }}
                         <tr>
                             <td class="info-label">{{ t $.Localizer "Protocol Type:" }}</td>
                             <td class="info-value">{{ .Item.Info.ProtocolType }}</td>

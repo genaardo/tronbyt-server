@@ -5,6 +5,7 @@ function enableLocationSearch(inputElement, resultsElement, hiddenInputElement, 
     function performSearch(query, isInitialSearch = false) {
         if (query.length === 0) {
             resultsElement.innerHTML = '';
+            resultsElement.classList.remove('has-results');
             return;
         }
 
@@ -15,6 +16,7 @@ function enableLocationSearch(inputElement, resultsElement, hiddenInputElement, 
             .then(response => response.json())
             .then(data => {
                 resultsElement.innerHTML = '';
+                resultsElement.classList.remove('has-results');
 
                 if (data.features && data.features.length > 0) {
                     const listItems = data.features.map(feature => {
@@ -34,7 +36,8 @@ function enableLocationSearch(inputElement, resultsElement, hiddenInputElement, 
 
                         li.addEventListener('click', function () {
                             inputElement.value = this.dataset.formatted;
-                            resultsElement.innerHTML = ''; // Clear results after click
+                            resultsElement.innerHTML = '';
+                            resultsElement.classList.remove('has-results'); // Hide after selection
                             const locationData = {
                                 locality: this.dataset.locality,
                                 description: this.dataset.formatted,
@@ -57,6 +60,9 @@ function enableLocationSearch(inputElement, resultsElement, hiddenInputElement, 
                         return li;
                     });
 
+                    // Show the results list
+                    resultsElement.classList.add('has-results');
+
                     if (isInitialSearch) {
                         const exactMatchLi = listItems.find(li => li.dataset.formatted === query);
                         if (exactMatchLi) {
@@ -66,7 +72,8 @@ function enableLocationSearch(inputElement, resultsElement, hiddenInputElement, 
                         }
                     }
                 } else {
-                    resultsElement.innerHTML = `<li>{{ _('No results found') }}</li>`;
+                    resultsElement.innerHTML = `<li>No results found</li>`;
+                    resultsElement.classList.add('has-results'); // Show "no results" message
                 }
             })
             .catch(error => console.error('Error fetching location data:', error));

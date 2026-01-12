@@ -195,6 +195,16 @@
     {{- end -}}
     {{ block "content" . }}{{ end }}
 </section>
+{{ if .UpdateAvailable }}
+<div class="footer-update-banner">
+    <a href="{{ .LatestReleaseURL }}" target="_blank" class="update-link">
+        <i data-lucide="circle-arrow-up" class="icon-sm"></i> {{ t .Localizer "Update available!" }}
+    </a>
+</div>
+{{ end }}
+<footer class="app-footer">
+    {{ t .Localizer "Server" }} {{ .ServerVersion }}{{ if .CommitHash }} (<a href="https://github.com/tronbyt/server/tree/{{ .CommitHash }}" target="_blank" class="commit-link">{{ substr .CommitHash 0 7 }}</a>){{ end }}
+</footer>
 <script>
   {{ if .User }}
   window.currentUserThemePreference = "{{ .User.ThemePreference }}";

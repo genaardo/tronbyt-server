@@ -327,23 +327,6 @@
             </div>
         </div>
     </div>
-    <!-- About Server -->
-    <!-- About Server -->
-    <div class="flex flex-col items-center justify-center mt-12 pb-12 gap-4">
-        {{ if .UpdateAvailable }}
-        <a href="{{ .LatestReleaseURL }}" target="_blank" class="btn-primary">
-            <i data-lucide="arrow-up-circle"></i> {{ t .Localizer "Update available!" }}
-        </a>
-        {{ end }}
-        <div class="text-xs text-secondary font-mono uppercase tracking-widest opacity-60">
-            {{ t .Localizer "Tronbyt Server" }} — v{{ .ServerVersion }}
-            {{ if .CommitHash }}
-            // <a href="https://github.com/tronbyt/server/tree/{{ .CommitHash }}"
-    target="_blank"
-    class="hover:text-primary transition-colors">{{ substr .CommitHash 0 7 }}</a>
-            {{ end }}
-        </div>
-    </div>
 </div>
 <!-- end dashboard-container -->
 <!-- Hidden form that the sticky bar submits -->

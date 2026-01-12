@@ -1154,10 +1154,17 @@ input[type="radio"]:checked::after {
     list-style: none !important;
     padding: 0 !important;
     margin: 0.25rem 0 0 0 !important;
-    border: 1px solid var(--neutral-300) !important;
+    border: none !important;
     background-color: var(--white) !important;
     max-height: 200px !important;
     overflow-y: auto !important;
+    display: none !important;
+}
+
+/* Show results list only when it has content (JS will toggle this class) */
+.location-results.has-results {
+    display: block !important;
+    border: 1px solid var(--neutral-300) !important;
 }
 
 .location-results:empty { display: none !important; }
@@ -1861,4 +1868,45 @@ details[open] summary .icon-sm {
 /* Space between content in advanced section */
 .space-y-6 > * + * {
     margin-top: 1.5rem !important;
+}
+
+/* ===========================================
+   APP FOOTER
+   =========================================== */
+.app-footer {
+    font-size: var(--font-size-sm);
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 2rem;
+    padding: 1rem;
+}
+
+.app-footer .commit-link {
+    color: var(--orange-500);
+    text-decoration: none;
+    font-family: var(--font-mono);
+}
+
+.app-footer .commit-link:hover {
+    text-decoration: underline;
+}
+
+/* Update Available Banner */
+.footer-update-banner {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.footer-update-banner .update-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: var(--orange-500);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+}
+
+.footer-update-banner .update-link:hover {
+    text-decoration: underline;
 }

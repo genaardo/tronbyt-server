@@ -529,6 +529,51 @@
                         {{ t .Localizer "Warning: Entering an incorrect URL can break the device's connection to this server. Fixing this requires re-flashing the device." }}
                     </p>
                 </div>
+                <div class="form-field">
+                    <label class="field-label">{{ t .Localizer "Hostname" }}</label>
+                    <div class="flex gap-2">
+                        <input type="text"
+                               id="reported_hostname"
+                               value="{{ derefOr .Device.Info.Hostname "" }}"
+                               class="field-input flex-1">
+                        <button type="button"
+                                class="btn-secondary"
+                                onclick="updateFirmwareSettings({hostname: document.getElementById('reported_hostname').value})"
+                                title="{{ t .Localizer "Sync Hostname to device via WebSocket" }}">
+                            <i data-lucide="refresh-cw"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-field">
+                    <label class="field-label">{{ t .Localizer "SNTP Server" }}</label>
+                    <div class="flex gap-2">
+                        <input type="text"
+                               id="reported_sntp_server"
+                               value="{{ derefOr .Device.Info.SNTPServer "" }}"
+                               class="field-input flex-1">
+                        <button type="button"
+                                class="btn-secondary"
+                                onclick="updateFirmwareSettings({sntp_server: document.getElementById('reported_sntp_server').value})"
+                                title="{{ t .Localizer "Sync SNTP Server to device via WebSocket" }}">
+                            <i data-lucide="refresh-cw"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="form-field">
+                    <label class="field-label">{{ t .Localizer "Syslog Address" }}</label>
+                    <div class="flex gap-2">
+                        <input type="text"
+                               id="reported_syslog_addr"
+                               value="{{ derefOr .Device.Info.SyslogAddr "" }}"
+                               class="field-input flex-1">
+                        <button type="button"
+                                class="btn-secondary"
+                                onclick="updateFirmwareSettings({syslog_addr: document.getElementById('reported_syslog_addr').value})"
+                                title="{{ t .Localizer "Sync Syslog Address to device via WebSocket" }}">
+                            <i data-lucide="refresh-cw"></i>
+                        </button>
+                    </div>
+                </div>
                 <div class="form-field-checkbox col-span-full">
                     <label class="checkbox-label" for="fw_swap_colors">
                         <input type="checkbox"
